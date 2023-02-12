@@ -4,11 +4,9 @@ import { CountryContext } from "../Context"
 export default function SingleCountry() {
 
     const {allCountryData, countryData} = useContext(CountryContext)
-    // console.log(allCountryData)
     const { countryName } = useParams()
-    // console.log(countryName)
     const currentCountry = allCountryData.find(country=>country.name===countryName)
-    console.log(currentCountry)
+    console.log(allCountryData)
     return (
         <div>
             <h1>{currentCountry.name}</h1>
