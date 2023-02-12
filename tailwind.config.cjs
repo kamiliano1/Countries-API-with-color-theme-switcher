@@ -20,6 +20,9 @@ module.exports = {
         600: "600",
         800: "800",
       },
+      gridTemplateColumns: {
+        "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))"
+      }
   },
   plugins: [],
 }

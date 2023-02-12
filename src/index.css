@@ -6,9 +6,5 @@
 
 html {
   font-family: 'Nunito Sans', sans-serif;
-  @apply bg-slate-700
-}
-
-img {
-  @apply w-40
+  @apply bg-veryDarkBlueBg
 }

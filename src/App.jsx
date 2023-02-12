@@ -1,165 +1,60 @@
 import { useState, useContext, useEffect } from 'react'
 import { CountryContext } from './Context'
+import SingleCountry from './components/SingleCountry'
+import { Routes, Route, Link } from "react-router-dom"
 function App() {
   const [count, setCount] = useState(0)
-  const [countryData, setCountryData] = useState([])
+  const { allCountryData, countryData, countryDetails } = useContext(CountryContext)
 
-  useEffect(()=>{
+  function Country(props) {
+    return (
+      <div className='w-[250px] text-white bg-darkBlue rounded-lg h-[350px] cursor-pointer'>
+        <img src={props.flag} alt={`${props.name} flag`} className="rounded-t-[0.5rem] h-[166px] w-[100%] " />
+        <div className='py-6 px-5 space-y-1'>
+          <h1 className='font-800 text-lg my-3'>{props.name}</h1>
+          <p><span className='font-800 '>Population: </span>{props.population}</p>
+          <p><span className='font-800 '>Region: </span>{props.region}</p>
+          <p><span className='font-800 '>Capital: </span>{props.capital}</p>
 
-    fetch("https://restcountries.com/v2/name/usa")
-      .then(res => res.json())
-      .then(data=> {
-        const currencies = data[0].currencies.map(currency=>{
-          return currency.name
-        }).join("")
-        const languages = data[0].languages.map(language=>{
-          return language.name
-        }).join(", ")
-        fetch(`https://restcountries.com/v3.1/alpha?codes=${data[0].borders.join(",")}`)
-        .then(res => res.json())
-        .then(borderData=> {console.log(borderData)
-          const borderCountry = borderData.map(country=>{
-            return country.name.common
-          }).join(", ")
-          setCountryData({
-          name:data[0].name,
-          nativeName: data[0].nativeName,
-          population: data[0].population.toLocaleString('en-US'),
-          region: data[0].region,
-          subregion: data[0].subregion,
-          capital: data[0].capital,
-          topLevelDomain: data[0].topLevelDomain,
-          currencies: currencies,
-          language: languages,
-          borders: borderCountry,
-          flag: data[0].flag
-        })
-        })
+        </div>
 
+      </div>
+    )
+  }
+  const allcountries = allCountryData.map((country,number)=>{
+    if (number<25) {
+
+      return (
+        <Link to={`/country/${country.name}`} key={country.id}>
+          <Country
+            id={country.id}
+            flag={country.flag}
+            name={country.name}
+            population={country.population}
+            region={country.region}
+            capital={country.capital}
+            onClick={()=>countryDetails(country.id)}
+  
+          />
+        </Link>
+      )
+    }
   })
-    
-  },[])
-  // console.log(countryData)
-  // console.log(countryData.nativeName)
-  const values = useContext(CountryContext)
-  // const currency = countryData.length>0 ?countryData.currencies.map(currenc=>{
-  //   return currenc.name
-  // }).join("") : ""
+  // console.log(allCountryData)
+  // Flaga, nazwa, populacja, region stolica
   return (
-    <div className="App">
-      <h1>{countryData.name}</h1>
-      <p>Native Name: {countryData.nativeName}</p>
-      <p>Population: {countryData.population}</p>
-      <p>Region: {countryData.region}</p>
-      <p>Sub Region: {countryData.subregion}</p>
-      <p>Capital: {countryData.capital}</p>
-      <p>Top Level Domain: {countryData.topLevelDomain}</p>
-      <p>Currencies: {countryData.currencies}</p>
-      <p>Languages: {countryData.language}</p>
-      <p>Border Countries: {countryData.borders}</p>
-      <img src={countryData.flag} alt={`${countryData.name} flag`} />
+    <div className="App max-w-[1440px] mx-auto  ">
+      <Routes>
+        <Route path="/country/:countryName" element={<SingleCountry />} />
+      </Routes>
+      <div className='grid gap-16 grid-cols-auto-fit place-items-center px-16'>
+        {allcountries}
+      </div>
 
+      {/* <SingleCountry /> */}
     </div>
   )
 }
 
 export default App
 
-
-// {
-//   "name": "Belgium",
-//   "topLevelDomain": [
-//       ".be"
-//   ],
-//   "alpha2Code": "BE",
-//   "alpha3Code": "BEL",
-//   "callingCodes": [
-//       "32"
-//   ],
-//   "capital": "Brussels",
-//   "altSpellings": [
-//       "BE",
-//       "België",
-//       "Belgie",
-//       "Belgien",
-//       "Belgique",
-//       "Kingdom of Belgium",
-//       "Koninkrijk België",
-//       "Royaume de Belgique",
-//       "Königreich Belgien"
-//   ],
-//   "subregion": "Western Europe",
-//   "region": "Europe",
-//   "population": 11555997,
-//   "latlng": [
-//       50.83333333,
-//       4
-//   ],
-//   "demonym": "Belgian",
-//   "area": 30528,
-//   "gini": 27.2,
-//   "timezones": [
-//       "UTC+01:00"
-//   ],
-//   "borders": [
-//       "FRA",
-//       "DEU",
-//       "LUX",
-//       "NLD"
-//   ],
-//   "nativeName": "België",
-//   "numericCode": "056",
-//   "flags": {
-//       "svg": "https://flagcdn.com/be.svg",
-//       "png": "https://flagcdn.com/w320/be.png"
-//   },
-//   "currencies": [
-//       {
-//           "code": "EUR",
-//           "name": "Euro",
-//           "symbol": "€"
-//       }
-//   ],
-//   "languages": [
-//       {
-//           "iso639_1": "nl",
-//           "iso639_2": "nld",
-//           "name": "Dutch",
-//           "nativeName": "Nederlands"
-//       },
-//       {
-//           "iso639_1": "fr",
-//           "iso639_2": "fra",
-//           "name": "French",
-//           "nativeName": "français"
-//       },
-//       {
-//           "iso639_1": "de",
-//           "iso639_2": "deu",
-//           "name": "German",
-//           "nativeName": "Deutsch"
-//       }
-//   ],
-//   "translations": {
-//       "br": "Belgia",
-//       "pt": "Bélgica",
-//       "nl": "België",
-//       "hr": "Belgija",
-//       "fa": "بلژیک",
-//       "de": "Belgien",
-//       "es": "Bélgica",
-//       "fr": "Belgique",
-//       "ja": "ベルギー",
-//       "it": "Belgio",
-//       "hu": "Belgium"
-//   },
-//   "flag": "https://flagcdn.com/be.svg",
-//   "regionalBlocs": [
-//       {
-//           "acronym": "EU",
-//           "name": "European Union"
-//       }
-//   ],
-//   "cioc": "BEL",
-//   "independent": true
-// }
