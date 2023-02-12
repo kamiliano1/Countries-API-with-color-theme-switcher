@@ -2,6 +2,9 @@ import { useState, useContext, useEffect } from 'react'
 import { CountryContext } from './Context'
 import SingleCountry from './components/SingleCountry'
 import { Routes, Route, Link } from "react-router-dom"
+import Navbar from './components/Navbar'
+import SearchBar from './components/SearchBar'
+import List from './components/List'
 function App() {
   const [count, setCount] = useState(0)
   const { allCountryData, countryData, countryDetails } = useContext(CountryContext)
@@ -44,6 +47,11 @@ function App() {
   // Flaga, nazwa, populacja, region stolica
   return (
     <div className="App max-w-[1440px] mx-auto  ">
+      <Navbar />
+      <div className='w-[90%] mx-auto'>
+        <SearchBar />
+        <List />
+      </div>
       <Routes>
         <Route path="/country/:countryName" element={<SingleCountry />} />
       </Routes>
