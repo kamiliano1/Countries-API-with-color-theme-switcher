@@ -44,9 +44,11 @@ function CountryContextProvider(props) {
         .then(data=> { 
             return allSetCountryData(
                 data.map((country, id)=>{
-                const borderCountry = country.borders ? country.borders.map(border=>border) : "None"
-                const currencies = country.currencies? country.currencies.map(currency=>currency.name) : "None"
-                const languages = country.languages.map(language=>language.name)
+                  // console.log(country.borders)
+                const borderCountry = country.borders ? country.borders.map(border=>border).join(",") : "None"
+                const currencies = country.currencies ? country.currencies.map(currency=>currency.name) : "None"
+                const languages = country.languages.map(language=>language.name).join(", ")
+
             return {
                     id:id,
                     name:country.name,
@@ -59,6 +61,7 @@ function CountryContextProvider(props) {
                     currencies: currencies,
                     language: languages,
                     borders: borderCountry,
+                    // borders: country.borders,
                     flag: country.flag
                 }})
             

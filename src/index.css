@@ -8,3 +8,7 @@ html {
   font-family: 'Nunito Sans', sans-serif;
   @apply bg-veryDarkBlueBg
 }
+
+p > span {
+  @apply font-600
+}
