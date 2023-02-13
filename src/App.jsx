@@ -5,9 +5,9 @@ import { Routes, Route, Link } from "react-router-dom"
 import Navbar from './components/Navbar'
 import SearchBar from './components/SearchBar'
 import List from './components/List'
+import Home from './pages/Home'
 function App() {
-  const [count, setCount] = useState(0)
-  const { allCountryData, countryData, countryDetails } = useContext(CountryContext)
+  const { currentSearch, allCountryData, countryDetails } = useContext(CountryContext)
 
   function Country(props) {
     return (
@@ -24,11 +24,32 @@ function App() {
       </div>
     )
   }
-  const allcountries = allCountryData.map((country,number)=>{
-    if (number<25) {
+  // const allcountries = allCountryData.map((country,number)=>{
+  //   if (number<25) {
+
+  //     return (
+  //       <Link to={`/country/${country.name}`} key={country.id}>
+  //         <Country
+  //           id={country.id}
+  //           flag={country.flag}
+  //           name={country.name}
+  //           population={country.population}
+  //           region={country.region}
+  //           capital={country.capital}
+  //           onClick={()=>countryDetails(country.id)}
+  
+  //         />
+  //       </Link>
+  //     )
+  //   }
+  // })
+  
+  const allcountries = allCountryData.length ? allCountryData.map((country,number)=>{
+    // console.log(currentSearch)
+    if (number<5) {
 
       return (
-        <Link to={`/country/${country.name}`} key={country.id}>
+        <Link to={`/${country.name}`} key={country.id}>
           <Country
             id={country.id}
             flag={country.flag}
@@ -42,21 +63,18 @@ function App() {
         </Link>
       )
     }
-  })
-  // console.log(allCountryData)
+  }) : ""
   // Flaga, nazwa, populacja, region stolica
   return (
     <div className="App max-w-[1440px] mx-auto  ">
-      <Navbar />
-      <div className='w-[90%] mx-auto'>
-        <SearchBar />
-        <List />
-      </div>
+      {/* <Home /> */}
+      
       <Routes>
-        <Route path="/country/:countryName" element={<SingleCountry />} />
+        <Route path="/:countryName" element={<SingleCountry />} />
+        <Route path="/" element={allcountries} />
       </Routes>
       <div className='grid gap-16 grid-cols-auto-fit place-items-center px-16'>
-        {allcountries}
+        {/* {allcountries} */}
       </div>
 
       {/* <SingleCountry /> */}

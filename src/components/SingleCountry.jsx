@@ -6,7 +6,7 @@ export default function SingleCountry() {
     const {allCountryData, countryData} = useContext(CountryContext)
     const { countryName } = useParams()
     const currentCountry = allCountryData.find(country=>country.name===countryName)
-    console.log(allCountryData)
+    // console.log(allCountryData)
     return (
         <div>
             <h1>{currentCountry.name}</h1>

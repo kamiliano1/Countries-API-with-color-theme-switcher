@@ -3,6 +3,7 @@ import { CountryContext } from "../Context"
 export default function List() {
 
     function optionChangeHandler(e) {
+        // console.log(e.target.value)
         updateListValue(e.target.value)
     }
 
@@ -10,12 +11,13 @@ export default function List() {
     return (
         <div className="bg-darkBlue py-3 px-3 rounded-lg text-white w-min">
             <select className="text-white bg-darkBlue pr-10" onChange={optionChangeHandler}>
-                <option value="" defaultValue disabled hidden>Filter by Region</option>
-                <option value="africa">Africa</option>
-                <option value="americas">America</option> 
-                <option value="asia">Asia</option> 
-                <option value="europe">Europe</option> 
-                <option value="oceania">Oceania</option> 
+                <option value="" default disabled hidden>Filter by Region</option>
+                <option value="all">All</option>
+                <option value="Africa">Africa</option>
+                <option value="Americas">America</option> 
+                <option value="Asia">Asia</option> 
+                <option value="Europe">Europe</option> 
+                <option value="Oceania">Oceania</option> 
             </select> 
         </div>
     )

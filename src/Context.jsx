@@ -9,16 +9,17 @@ function CountryContextProvider(props) {
     const [countryData, setCountryData] = useState([])
     const [allCountryData, allSetCountryData] = useState([])
     const [darkMode, setDarkMode] = useState(false)
-    const [listValue, setListValue] = useState("europe")
+    const [listValue, setListValue] = useState("")
     const [searchBarValue, setSearchBarValue] = useState("")
-    const [fetchLink, setFetchLink] = useState("https://restcountries.com/v2/region/europe")
-
+    const [fetchLink, setFetchLink] = useState("https://restcountries.com/v2/all")
+    const [allCountry, setAllCountry] = useState([])
+    const [currentSearch, setCurrentSearch] = useState("")
+    const [currentRegion, setCurrentRegion] = useState("")
     function countryDetails(id) {
         console.log(id)
 
     }
 
-    
     function handleChange(e) {
       setSearchBarValue(prev=>e.target.value)
   }
@@ -28,49 +29,16 @@ function CountryContextProvider(props) {
 }
 
     function toggleDarkMode() {
-      console.log(darkMode)
       setDarkMode(prevMode=>!prevMode)
     }
 
     function updateListValue(value) {
-      setListValue(value)
-      setFetchLink(`https://restcountries.com/v2/region/${listValue}`)
-      console.log(listValue)
+      value==="all" ? setFetchLink(`https://restcountries.com/v2/all`) 
+      : setFetchLink(`https://restcountries.com/v2/region/${value}`)
+
     }
 
     useEffect(()=>{
-  
-    //   fetch("https://restcountries.com/v2/name/poland")
-    //     .then(res => res.json())
-    //     .then(data=> {
-    //         fetch(`https://restcountries.com/v3.1/alpha?codes=${data[0].borders.join(",")}`)
-    //         .then(res => res.json())
-    //         .then(borderData=> {
-    //           const currencies = data[0].currencies.map(currency=>{
-    //             return currency.name
-    //           }).join("")
-    //           const languages = data[0].languages.map(language=>{
-    //             return language.name
-    //           }).join(", ")
-    //         const borderCountry = borderData.map(country=>{
-    //           return country.name.common
-    //         }).join(", ")
-    //         return setCountryData({
-    //         name:data[0].name,
-    //         nativeName: data[0].nativeName,
-    //         population: data[0].population.toLocaleString('en-US'),
-    //         region: data[0].region,
-    //         subregion: data[0].subregion,
-    //         capital: data[0].capital,
-    //         topLevelDomain: data[0].topLevelDomain,
-    //         currencies: currencies,
-    //         language: languages,
-    //         borders: borderCountry,
-    //         flag: data[0].flag
-    //         })
-    //       })
-    // })
-    // https://restcountries.com/v2/name/peru
       fetch(fetchLink)
         .then(res => res.json())
         .then(data=> { 
@@ -98,13 +66,60 @@ function CountryContextProvider(props) {
             )
                 
     })
-    console.log(allCountryData)
+    // setCurrentSearch(allCountryData)
+    // setCurrentSearch(allCountry)
     },[fetchLink])
+
+    useEffect(()=>{
+      fetch("https://restcountries.com/v2/all")
+      .then(res =>res.json())
+      .then(data=> setAllCountry(data.map((country, id)=>{
+            const borderCountry = country.borders ? country.borders.map(border=>border) : "None"
+            const currencies = country.currencies? country.currencies.map(currency=>currency.name) : "None"
+            const languages = country.languages.map(language=>language.name)
+        return {
+                id:id,
+                name:country.name,
+                nativeName: country.nativeName,
+                population: country.population.toLocaleString('en-US'),
+                region: country.region,
+                subregion: country.subregion,
+                capital: country.capital,
+                topLevelDomain: country.topLevelDomain,
+                currencies: currencies,
+                language: languages,
+                borders: borderCountry,
+                flag: country.flag
+            }})
+
+        )
+        )
+        
+        
+    },[])
+
+    useEffect(()=>{
+      setCurrentSearch(allCountry)
+      setCurrentRegion(allCountry)
+    },[allCountry])
+
+    // console.log(allCountry, " all")
+
+    // function findCountry() {
+    //   const panstwo= "POLAND"
+    //   allCountry.length>0 ?setCurrentSearch(allCountry.find(country=>country.name.toLowerCase()===panstwo.toLowerCase())) : ""
+    //   console.log(currentSearch)
+    // }
 
 
 
     return (
-        <CountryContext.Provider value={{allCountryData, countryData, countryDetails, darkMode, toggleDarkMode, updateListValue,searchBarValue, handleChange, handleSubmit}}>
+        <CountryContext.Provider value={{
+        allCountryData, 
+        countryData, countryDetails, darkMode, toggleDarkMode, 
+        updateListValue,searchBarValue, handleChange, 
+        handleSubmit, currentSearch,
+        }}>
             {props.children}
         </CountryContext.Provider>
     )
