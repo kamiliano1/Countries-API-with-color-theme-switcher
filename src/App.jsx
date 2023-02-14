@@ -44,9 +44,9 @@ function App() {
   //   }
   // })
   
-  const allcountries = allCountryData.length ? allCountryData.map((country,number)=>{
+  const allcountries = allCountryData.map((country,number)=>{
     // console.log(currentSearch)
-    if (number<5) {
+    if (number<500) {
 
       return (
         <Link to={`/${country.name}`} key={country.id}>
@@ -63,19 +63,26 @@ function App() {
         </Link>
       )
     }
-  }) : ""
-  // Flaga, nazwa, populacja, region stolica
+  })
+
   return (
-    <div className="App max-w-[1440px] mx-auto  ">
+    <div className="App max-w-[1440px] mx-auto">
       {/* <Home /> */}
-      
+      <Navbar />
       <Routes>
         <Route path="/:countryName" element={<SingleCountry />} />
-        <Route path="/" element={allcountries} />
+        <Route path="/" element={
+                <div className='w-[90%] mx-auto'>
+
+                <SearchBar/>
+                <List />
+                <div className='grid gap-8 md:gap-16 grid-cols-auto-fit place-items-center md:px-16'>
+                {allcountries}
+              </div>
+                </div>
+          } />
       </Routes>
-      <div className='grid gap-16 grid-cols-auto-fit place-items-center px-16'>
-        {/* {allcountries} */}
-      </div>
+
 
       {/* <SingleCountry /> */}
     </div>

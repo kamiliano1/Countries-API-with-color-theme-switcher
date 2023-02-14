@@ -21,7 +21,12 @@ module.exports = {
         800: "800",
       },
       gridTemplateColumns: {
-        "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))"
+        "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))",
+        "big-screen" : "3fr .5fr 2fr 2fr"
+      },
+      gridTemplateRows: {
+        // "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))",
+        "big-screen" : "auto"
       }
   },
   plugins: [],

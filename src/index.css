@@ -12,3 +12,9 @@ html {
 p > span {
   @apply font-600
 }
+
+option[disabled] {
+    color: hsl(0 0% 100% / 1);
+    background-color: inherit;
+    /* color:red */
+}

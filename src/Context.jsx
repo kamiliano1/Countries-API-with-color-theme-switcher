@@ -6,17 +6,13 @@ const CountryContext = createContext()
 
 function CountryContextProvider(props) {
 
-    const [countryData, setCountryData] = useState([])
+    // const [countryData, setCountryData] = useState([])
     const [allCountryData, allSetCountryData] = useState([])
     const [darkMode, setDarkMode] = useState(false)
-    const [listValue, setListValue] = useState("")
     const [searchBarValue, setSearchBarValue] = useState("")
     const [fetchLink, setFetchLink] = useState("https://restcountries.com/v2/all")
     const [allCountry, setAllCountry] = useState([])
-    const [currentSearch, setCurrentSearch] = useState("")
-    const [currentRegion, setCurrentRegion] = useState("")
     function countryDetails(id) {
-        console.log(id)
 
     }
 
@@ -26,6 +22,7 @@ function CountryContextProvider(props) {
   function handleSubmit(e) {
     e.preventDefault()
     setFetchLink(`https://restcountries.com/v2/name/${searchBarValue}`)
+    setSearchBarValue("")
 }
 
     function toggleDarkMode() {
@@ -33,22 +30,17 @@ function CountryContextProvider(props) {
     }
 
     function updateListValue(value) {
-      value==="all" ? setFetchLink(`https://restcountries.com/v2/all`) 
-      : setFetchLink(`https://restcountries.com/v2/region/${value}`)
-
+      allSetCountryData(value==="all" ? allCountry : allCountry.filter(country=>country.region===value))
     }
 
     useEffect(()=>{
       fetch(fetchLink)
         .then(res => res.json())
-        .then(data=> { 
-            return allSetCountryData(
+        .then(data=> allSetCountryData(
                 data.map((country, id)=>{
-                  // console.log(country.borders)
                 const borderCountry = country.borders ? country.borders.map(border=>border).join(",") : "None"
                 const currencies = country.currencies ? country.currencies.map(currency=>currency.name) : "None"
                 const languages = country.languages.map(language=>language.name).join(", ")
-
             return {
                     id:id,
                     name:country.name,
@@ -61,14 +53,13 @@ function CountryContextProvider(props) {
                     currencies: currencies,
                     language: languages,
                     borders: borderCountry,
-                    // borders: country.borders,
-                    flag: country.flag
+                    flag: country.flag,
                 }})
             
 
             )
                 
-    })
+    )
     // setCurrentSearch(allCountryData)
     // setCurrentSearch(allCountry)
     },[fetchLink])
@@ -79,7 +70,7 @@ function CountryContextProvider(props) {
       .then(data=> setAllCountry(data.map((country, id)=>{
             const borderCountry = country.borders ? country.borders.map(border=>border) : "None"
             const currencies = country.currencies? country.currencies.map(currency=>currency.name) : "None"
-            const languages = country.languages.map(language=>language.name)
+            const languages = country.languages.map(language=>language.name).join(", ")
         return {
                 id:id,
                 name:country.name,
@@ -98,30 +89,19 @@ function CountryContextProvider(props) {
         )
         )
         
-        
+        // console.log(allCountry)
     },[])
 
-    useEffect(()=>{
-      setCurrentSearch(allCountry)
-      setCurrentRegion(allCountry)
-    },[allCountry])
 
-    // console.log(allCountry, " all")
 
-    // function findCountry() {
-    //   const panstwo= "POLAND"
-    //   allCountry.length>0 ?setCurrentSearch(allCountry.find(country=>country.name.toLowerCase()===panstwo.toLowerCase())) : ""
-    //   console.log(currentSearch)
-    // }
 
 
 
     return (
         <CountryContext.Provider value={{
-        allCountryData, 
-        countryData, countryDetails, darkMode, toggleDarkMode, 
+        allCountryData, allCountry, darkMode, toggleDarkMode, 
         updateListValue,searchBarValue, handleChange, 
-        handleSubmit, currentSearch,
+        handleSubmit,
         }}>
             {props.children}
         </CountryContext.Provider>
