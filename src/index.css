@@ -6,15 +6,16 @@
 
 html {
   font-family: 'Nunito Sans', sans-serif;
-  @apply bg-veryDarkBlueBg
+
 }
 
 p > span {
   @apply font-600
 }
 
-option[disabled] {
-    color: hsl(0 0% 100% / 1);
-    background-color: inherit;
-    /* color:red */
+.box-shadow {
+  box-shadow: 0px 0px 7px hsl(0, 0%, 79%); 
+}
+.dark .box-shadow {
+  box-shadow: 0px 0px 7px hsl(200, 15%, 8%); 
 }

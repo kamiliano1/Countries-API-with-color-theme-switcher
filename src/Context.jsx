@@ -12,12 +12,10 @@ function CountryContextProvider(props) {
     const [searchBarValue, setSearchBarValue] = useState("")
     const [fetchLink, setFetchLink] = useState("https://restcountries.com/v2/all")
     const [allCountry, setAllCountry] = useState([])
-    function countryDetails(id) {
-
-    }
 
     function handleChange(e) {
       setSearchBarValue(prev=>e.target.value)
+      setFetchLink(`https://restcountries.com/v2/name/${e.target.value}`)
   }
   function handleSubmit(e) {
     e.preventDefault()

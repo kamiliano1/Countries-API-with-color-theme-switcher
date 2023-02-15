@@ -14,14 +14,20 @@ export default function Navbar() {
         )
       }
     return (
-        <div className="bg-darkBlue py-7 px-5 text-white flex ">
-        <h1 className="font-800 mr-auto">Where in the world?</h1>
-        <div className="cursor-pointer flex items-center" onClick={toggleDarkMode}>
-            {
-                darkMode ? <SunIcon /> : <MoonIcon />
-            }
-        <h2 className="text-sm ml-2">Dark Mode</h2>
+        <div className="bg-white dark:bg-veryDarkBlueBg py-7 text-black dark:text-white ">
+            <div className="max-w-[1440px] mx-auto">
+                <div className="flex w-[90%] mx-auto ">
+                    <h1 className="font-800 mr-auto">Where in the world?</h1>
+                    <div className="cursor-pointer flex items-center" onClick={toggleDarkMode}>
+                        {
+                            darkMode ? <MoonIcon /> :  <SunIcon />
+                        }
+                    <h2 className="text-sm ml-2">Dark Mode</h2>
+                </div>
+
+                </div>
+
+            </div>
         </div>
-    </div>
     )
 }

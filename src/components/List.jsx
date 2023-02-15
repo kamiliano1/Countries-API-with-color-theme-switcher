@@ -8,8 +8,8 @@ export default function List() {
 
     const { darkMode, updateListValue } = useContext(CountryContext)
     return (
-        <div className="bg-darkBlue py-3 px-3 rounded-lg w-min mb-6">
-            <select className="text-white bg-darkBlue pr-10" onChange={optionChangeHandler}
+        <div className="dark:bg-darkBlue bg-white h-[50px] flex px-3 rounded-lg w-min mb-6 md:m-0">
+            <select className="text-black dark:text-white dark:bg-darkBlue bg-white pr-10" onChange={optionChangeHandler}
             defaultValue={"default"}>
                 <option value="default" disabled hidden>Filter by Region</option>
                 <option value="all">All</option>

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [ 
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -22,11 +23,11 @@ module.exports = {
       },
       gridTemplateColumns: {
         "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))",
-        "big-screen" : "3fr .5fr 2fr 2fr"
+        "big-screen" : "4fr .5fr 2fr 2fr"
       },
       gridTemplateRows: {
         // "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))",
-        "big-screen" : "auto"
+
       }
   },
   plugins: [],

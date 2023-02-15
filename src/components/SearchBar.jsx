@@ -8,7 +8,8 @@ export default function SearchBar() {
       }
     const { darkMode, toggleDarkMode, handleChange, searchBarValue, handleSubmit } = useContext(CountryContext)
     return (
-        <form action="" onSubmit={handleSubmit} className="text-white bg-darkBlue flex px-8 py-3 w-[100%] rounded-lg my-5">
+        <form action="" onSubmit={handleSubmit} className="text-black dark:text-white dark:bg-darkBlue bg-white
+        flex px-8 h-[50px] w-[100%] md:w-[20%] rounded-lg my-5">
             <button type="submit" className="text-2xl"><MdiMagnify/></button>
             <input 
             type="text" 
@@ -16,7 +17,7 @@ export default function SearchBar() {
             onChange={handleChange}
             value={searchBarValue} 
             placeholder="Search for a country..." 
-            className="ml-4 py-1 bg-darkBlue placeholder-white text-sm" />
+            className="ml-4 py-1 dark:bg-darkBlue bg-white placeholder-black  dark:placeholder-white text-sm rounded-lg" />
         </form>
     )
 }

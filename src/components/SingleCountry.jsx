@@ -17,7 +17,7 @@ export default function SingleCountry() {
     function BorderCountryButton(props) {
         return (
             <Link to={`/${props.name}`}>
-                <button className="-order-2 bg-darkBlue my-1 flex self-start px-5 py-1" >{props.name}</button>
+                <button className="-order-2 dark:bg-darkBlue bg-white dark:text-veryLightGray text-black my-1 flex self-start px-5 py-1" >{props.name}</button>
             </Link>
         )
     }
@@ -48,33 +48,34 @@ export default function SingleCountry() {
        <div>
         {
 allCountry.length ?
-        <div className="text-white text-xs flex flex-col md:grid md:grid-cols-4 
-        md:grid-rows-6 w-[85%]  mx-auto space-y-1 md:grid-rows-big-screen md:grid-cols-big-screen gap-y-10">
+        <div className="dark:text-veryLightGray text-black text-xs flex flex-col md:grid md:grid-cols-4 
+        md:grid-rows-6 w-[85%] md:w-[90%] mx-auto md:grid-rows-big-screen md:grid-cols-big-screen md:gap-y-4 
+        md:gap-x-10">
 
-            <button className="-order-2 bg-darkBlue my-6 flex self-start px-5 py-1 md:col-start-1 md:row-start-1 md:justify-self-start " 
+            <button className="box-shadow -order-2 dark:bg-darkBlue bg-white mt-8 flex self-start px-5 md:px-7 py-2 md:col-start-1 md:row-start-1 md:justify-self-start " 
             onClick={()=>navigate("/")}><IcBaselineArrowBack /> Back</button>
-            <h1 className="text-2xl pb-3 font-700 md:col-start-3 md:row-start-3 col-span-2">{currentCountry.name}</h1>
-            <div className="md:row-start-4 md:col-start-3">
-                <p><span className="font-600">Native Name:</span> {currentCountry.nativeName}</p>
-                <p><span className="font-600">Population:</span> {currentCountry.population}</p>
-                <p><span className="font-600">Region:</span> {currentCountry.region}</p>
-                <p><span className="font-600">Sub Region:</span> {currentCountry.subregion}</p>
-                <p><span className="font-600">Capital:</span> {currentCountry.capital}</p>
+            <h1 className="text-2xl md:text-3xl pb-3 font-800 md:col-start-3 md:row-start-3 col-span-2">{currentCountry.name}</h1>
+            <div className="md:row-start-4 md:col-start-3 space-y-[.9rem]">
+                <p className="md:text-lg"><span className="font-600 ">Native Name:</span> {currentCountry.nativeName}</p>
+                <p className="md:text-lg"><span className="font-600">Population:</span> {currentCountry.population}</p>
+                <p className="md:text-lg"><span className="font-600">Region:</span> {currentCountry.region}</p>
+                <p className="md:text-lg"><span className="font-600">Sub Region:</span> {currentCountry.subregion}</p>
+                <p className="md:text-lg"><span className="font-600">Capital:</span> {currentCountry.capital}</p>
             </div>
-            <div className="space-y-1 py-7 md:row-start-4 md:col-start-4  md:p-0 ">
-                <p><span className="font-600">Top Level Domain:</span> {currentCountry.topLevelDomain}</p>
-                <p><span className="font-600">Currencies:</span> {currentCountry.currencies}</p>
-                <p><span className="font-600">Languages:</span> {currentCountry.language}</p>
+            <div className="space-y-2 py-9 md:row-start-4 md:col-start-4  md:p-0 ">
+                <p className="md:text-lg"><span className="font-600">Top Level Domain:</span> {currentCountry.topLevelDomain}</p>
+                <p className="md:text-lg"><span className="font-600">Currencies:</span> {currentCountry.currencies}</p>
+                <p className="md:text-lg"><span className="font-600">Languages:</span> {currentCountry.language}</p>
             </div>
             {
             currentCountry.borders !=="None" && 
             <div className="md:row-start-5 md:col-start-3 md:col-span-2 md:flex md:items-center">
-                <p className="mb-3 md:self-center md:mb-0 md:whitespace-nowrap"><span className="">Border Countries:</span></p>
-                <div className="flex gap-2 flex-wrap mb-10 justify-start md:mb-0 md:ml-5 ">
+                <div className="flex gap-2 flex-wrap mb-10 justify-start md:mb-0 md:mt-10 ">
+                <p className="md:text-lg self-center md:mb-0 md:whitespace-nowrap w-[100%] md:w-auto"><span>Border Countries:</span></p>
                     {borderButtons}
                 </div>
             </div> }
-            <img className="-order-1 py-6 h-[100%] w-[100%] md:col-start-1 md:row-start-2 md:row-span-5" src={currentCountry.flag} alt={`${currentCountry.name} flag`} />
+            <img className="-order-1 py-6 my-7 h-[250px] md:h-auto md:w-[100%] md:col-start-1 md:row-start-2 md:row-span-5" src={currentCountry.flag} alt={`${currentCountry.name} flag`} />
         </div>
         :
         <Spinner />}
