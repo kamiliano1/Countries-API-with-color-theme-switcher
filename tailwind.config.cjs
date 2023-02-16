@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        md: "570px"
+      },
       colors: {
         darkBlue: "hsl(209, 23%, 22%)",
         veryDarkBlueBg: "hsl(207, 26%, 17%)",
@@ -14,6 +17,9 @@ module.exports = {
         darkGray: "hsl(0, 0%, 52%)",
         veryLightGray: "hsl(0, 0%, 98%)",
         white: "hsl(0, 0%, 100%)",
+      },
+      margin: {
+        buttonClamp: "clamp(1rem, 3vw, 5rem)"
       }
     },
       fontWeight: {
@@ -22,13 +28,12 @@ module.exports = {
         800: "800",
       },
       gridTemplateColumns: {
-        "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))",
-        "big-screen" : "4fr .5fr 2fr 2fr"
+        "auto-fill" : "repeat(auto-fill, minmax(250px, 1fr))",
       },
       gridTemplateRows: {
-        // "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))",
+        "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))",
+      },
 
-      }
   },
   plugins: [],
 }
