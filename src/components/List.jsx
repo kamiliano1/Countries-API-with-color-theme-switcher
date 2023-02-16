@@ -6,7 +6,7 @@ export default function List() {
         updateListValue(e.target.value)
     }
 
-    const { darkMode, updateListValue } = useContext(CountryContext)
+    const { updateListValue } = useContext(CountryContext)
     return (
         <div className="dark:bg-darkBlue bg-white h-[50px] flex px-3 rounded-lg w-min mb-6 md:m-0">
             <select className="text-black dark:text-white dark:bg-darkBlue bg-white pr-10" onChange={optionChangeHandler}
