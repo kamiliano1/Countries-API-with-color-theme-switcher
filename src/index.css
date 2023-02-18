@@ -12,11 +12,11 @@ p > span {
 }
 
 .box-shadow {
-  box-shadow: 0px 0px 7px hsl(0, 0%, 79%); 
+  box-shadow: 1px 4px 7px hsl(0, 0%, 79%); 
 }
 
 .dark .box-shadow {
-  box-shadow: 0px 0px 7px hsl(200, 15%, 8%); 
+  box-shadow: 1px 4px 7px hsl(200, 15%, 8%); 
 }
 
 .clampM {

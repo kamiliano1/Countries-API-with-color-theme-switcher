@@ -1,14 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
-  content: [ 
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  darkMode: "class",
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       screens: {
-        md: "570px"
+        md: "570px",
       },
       colors: {
         darkBlue: "hsl(209, 23%, 22%)",
@@ -19,21 +16,24 @@ module.exports = {
         white: "hsl(0, 0%, 100%)",
       },
       margin: {
-        buttonClamp: "clamp(1rem, 3vw, 5rem)"
-      }
-    },
-      fontWeight: {
-        300: "300",
-        600: "600",
-        800: "800",
-      },
-      gridTemplateColumns: {
-        "auto-fill" : "repeat(auto-fill, minmax(250px, 1fr))",
-      },
-      gridTemplateRows: {
-        "auto-fit" : "repeat(auto-fit, minmax(250px, 1fr))",
+        buttonClamp: "clamp(1rem, 3vw, 3rem)",
       },
 
+      gridTemplateColumns: {
+        "auto-fill": "repeat(auto-fill, minmax(250px, 1fr))",
+        "auto-fit-big": "minmax(350px, 2fr) 1fr 1fr",
+      },
+      gridTemplateRows: {
+        "auto-fit": "repeat(auto-fit, minmax(250px, 1fr))",
+        "auto-fit-big": "repeat(4, min-content)",
+        "min-content": "min-content",
+      },
+    },
+    fontWeight: {
+      300: "300",
+      600: "600",
+      800: "800",
+    },
   },
   plugins: [],
-}
+};

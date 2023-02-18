@@ -13,17 +13,17 @@ function App() {
 
   return (
     <div className={` ${colorScheme}`}>
-      <div className='bg-white dark:bg-veryDarkBlueBg min-h-[100vh]'>
+      <div className="bg-white dark:bg-veryDarkBlueBg min-h-[100vh]">
         <Navbar />
-        <div className='max-w-[1440px] mx-auto'>
+        <div className="max-w-[1440px] mx-auto ">
           <Routes>
             <Route path="/:countryName" element={<SingleCountryDetail />} />
-            <Route path="/" element={ <Home />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default App

@@ -4,12 +4,12 @@ import App from './App'
 import './index.css'
 import { CountryContextProvider } from './Context'
 import {BrowserRouter as Router} from "react-router-dom"
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <CountryContextProvider>
       <Router>
         <App />
       </Router>
     </CountryContextProvider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
