@@ -5,7 +5,7 @@ export default function Country(props) {
           <img
             src={props.flag}
             alt={`${props.name} flag`}
-            className="rounded-t-[0.5rem] h-[100%] w-[100%] object-fill "
+            className="rounded-t-[0.5rem] h-[100%] w-[100%] object-cover"
           />
         </div>
         <div className="py-6 px-5 space-y-1">

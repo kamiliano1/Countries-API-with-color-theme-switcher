@@ -24,7 +24,7 @@ export default function Home() {
     });
     return (
       <div className="w-[90%] mx-auto">
-        <section className="md:flex items-center justify-between mb-5 ">
+        <section className="md:flex items-center justify-between mb-5">
           <SearchBar />
           <List />
         </section>

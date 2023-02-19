@@ -1,9 +1,9 @@
-import { createContext, useState, useEffect } from "react"
+import { createContext, useState, useEffect } from "react";
 
-const CountryContext = createContext()
+const CountryContext = createContext();
 
 function CountryContextProvider(props) {
-  const [allCountryData, allSetCountryData] = useState([]);
+  const [allCountryData, setAllCountryData] = useState([]);
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("isDarkActive")) || false
   );
@@ -30,7 +30,7 @@ function CountryContextProvider(props) {
   }
 
   function updateListValue(value) {
-    allSetCountryData(
+    setAllCountryData(
       value === "all"
         ? allCountry
         : allCountry.filter((country) => country.region === value)
@@ -38,45 +38,13 @@ function CountryContextProvider(props) {
     setSearchBarValue("");
   }
 
-
-  function fetchIpAddress(address) {
-    fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_9EuNfN5MKmLWFLAw25PFyR3RiFCNA&ipAddress=${address}`)
-    .then(res=>{
-      if (res.ok) {
-        setTypedAddress("")
-        return res.json()
-      }
-      else {
-        return Promise.reject(res)
-      }
-    })
-    .then(data=>{
-      setIpAdress({
-        ip:data.ip,
-        isp:data.isp,
-        location:data.location.city,
-        region:data.location.region,
-        postalCode:data.location.postalCode,
-        timeZone:data.location.timezone,
-        latitude:data.location.lat,
-        longitude:data.location.lng,
-    })
-  }
-      )
-      .catch((res) => {
-        setIpPlaceHolder(res.statusText)
-        setTypedAddress("")
-      })
-  }
-
-
   function fetchData(fetchLink, fetchData) {
     fetch(fetchLink)
-      .then(res => {
+      .then((res) => {
         if (res.ok) {
-          return res.json()
+          return res.json();
         } else {
-          return Promise.reject(res)
+          return Promise.reject(res);
         }
       })
       .then((data) =>
@@ -108,9 +76,9 @@ function CountryContextProvider(props) {
           })
         )
       )
-      .catch((res) =>{
-        console.log("Wrong country Name")
-      })
+      .catch((res) => {
+        console.log("Wrong country Name");
+      });
   }
   useEffect(() => {
     localStorage.setItem("isDarkActive", JSON.stringify(darkMode));
@@ -121,7 +89,7 @@ function CountryContextProvider(props) {
   }, []);
 
   useEffect(() => {
-    fetchData(fetchLink, allSetCountryData);
+    fetchData(fetchLink, setAllCountryData);
   }, [fetchLink]);
 
   return (
@@ -142,4 +110,4 @@ function CountryContextProvider(props) {
   );
 }
 
-export { CountryContext, CountryContextProvider }
+export { CountryContext, CountryContextProvider };
